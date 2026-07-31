@@ -87,3 +87,7 @@ class handler(BaseHTTPRequestHandler):
         self.send_header("Access-Control-Allow-Origin", "*")
         self.end_headers()
         self.wfile.write(json.dumps(response_data).encode("utf-8"))
+
+
+app = handler
+application = handler
