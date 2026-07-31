@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PixelPulse — Enterprise Product Analytics & SQL Data Warehouse</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- SIDEBAR NAVIGATION -->
+  <aside class="sidebar">
+    <div>
+      <div class="brand">
+        <div class="brand-icon">
+          <!-- PixelPulse Waveform Pulse -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 12h3l3-9 4 18 3-12 3 6h3"/>
+            <circle cx="12" cy="12" r="2" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="brand-title">PixelPulse <span class="badge badge-blue" style="font-size: 10px; margin-left: 4px;">AI</span></div>
+      </div>
+
+      <div class="nav-section-label">Analytics Workspace</div>
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <a href="#dashboard" class="nav-link active" id="nav-dashboard" onclick="switchTab('dashboard')">
+            <div class="nav-link-left">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/></svg>
+              <span>Dashboard</span>
+            </div>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#report" class="nav-link" id="nav-report" onclick="switchTab('report')">
+            <div class="nav-link-left">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              <span>Executive Report</span>
+            </div>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#explorer" class="nav-link" id="nav-explorer" onclick="switchTab('explorer')">
+            <div class="nav-link-left">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <span>User Journey</span>
+            </div>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#funnel" class="nav-link" id="nav-funnel" onclick="switchTab('funnel')">
+            <div class="nav-link-left">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg>
+              <span>Funnel Analytics</span>
+            </div>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#retention" class="nav-link" id="nav-retention" onclick="switchTab('retention')">
+            <div class="nav-link-left">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              <span>Cohort Retention</span>
+            </div>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#abtest" class="nav-link" id="nav-abtest" onclick="switchTab('abtest')">
+            <div class="nav-link-left">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              <span>A/B Experiment</span>
+            </div>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#sql" class="nav-link" id="nav-sql" onclick="switchTab('sql')">
+            <div class="nav-link-left">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+              <span>SQL Workbench</span>
+            </div>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#quality" class="nav-link" id="nav-quality" onclick="switchTab('quality')">
+            <div class="nav-link-left">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span>Data Quality</span>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Sidebar Status Widget -->
+    <div class="sidebar-widget">
+      <div class="widget-title">Pipeline Status</div>
+      <div class="widget-subtitle">5 Integrity Checks Passed</div>
+      <button class="btn-primary" id="btn-run-pipeline" onclick="reRunPipeline()">
+        <span>Run Pipeline</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN WRAPPER -->
+  <main class="main-wrapper">
+
+    <!-- HEADER BAR -->
+    <header class="header-bar">
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <h1 class="page-title" id="view-title">PixelPulse Administration Overview</h1>
+        <span class="status-pill status-active">SQLite WAL Active</span>
+      </div>
+      <div class="header-actions">
+        <div class="search-box">
+          <input type="text" id="table-search" placeholder="Search metrics or channels..." onkeyup="filterTable()">
+        </div>
+        <button class="icon-btn" title="Toggle Dark/Light Theme" onclick="toggleTheme()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- VIEW 1: DASHBOARD OVERVIEW -->
+    <div id="view-dashboard" class="tab-view">
+      <section class="kpi-grid">
+        <div class="kpi-card border-blue">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <div>
+              <div class="kpi-label">Total Signups</div>
+              <div class="kpi-value" id="kpi-signups">6,000</div>
+            </div>
+          </div>
+          <div class="kpi-trend positive"><span>↑ 16.25%</span></div>
+        </div>
+
+        <div class="kpi-card border-green">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <div>
+              <div class="kpi-label">Overall Paid Conv.</div>
+              <div class="kpi-value" id="kpi-conv">7.07%</div>
+            </div>
+          </div>
+          <div class="kpi-trend positive"><span>↑ 16.1% Top</span></div>
+        </div>
+
+        <div class="kpi-card border-purple">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <div>
+              <div class="kpi-label">ML Churn Risk</div>
+              <div class="kpi-value" id="kpi-churn">58.4%</div>
+            </div>
+          </div>
+          <div class="kpi-trend positive" style="background: rgba(168, 85, 247, 0.18); color: #c084fc;"><span>Moderate</span></div>
+        </div>
+
+        <div class="kpi-card border-magenta">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <div>
+              <div class="kpi-label">Total Revenue</div>
+              <div class="kpi-value" id="kpi-revenue">$14,775</div>
+            </div>
+          </div>
+          <div class="kpi-trend positive"><span>↑ $4.83/sub</span></div>
+        </div>
+      </section>
+
+      <section class="dashboard-grid">
+        <div class="chart-card">
+          <div class="card-header">
+            <h2 class="card-title">Acquisition Funnel Statistic</h2>
+            <div class="card-tabs">
+              <button class="tab-btn active" id="btn-chart-funnel" onclick="updateMainChart('funnel')">Funnel Rate</button>
+              <button class="tab-btn" id="btn-chart-retention" onclick="updateMainChart('retention')">Retention</button>
+              <button class="tab-btn" id="btn-chart-revenue" onclick="updateMainChart('revenue')">Revenue</button>
+            </div>
+          </div>
+          <div style="height: 300px; position: relative;"><canvas id="mainChart"></canvas></div>
+        </div>
+
+        <div class="chart-card">
+          <div class="card-header"><h2 class="card-title">Channel Revenue Share</h2></div>
+          <div style="height: 300px; position: relative;"><canvas id="donutChart"></canvas></div>
+        </div>
+      </section>
+
+      <section class="secondary-grid">
+        <div class="chart-card">
+          <div class="card-header">
+            <h2 class="card-title">Acquisition Performance by Channel</h2>
+            <select id="channel-filter" onchange="filterChannelTable()" style="padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-primary); font-weight: 700; font-size: 12px;">
+              <option value="all">All Acquisition Channels</option>
+              <option value="referral">Referral</option>
+              <option value="organic_search">Organic Search</option>
+              <option value="app_store_featured">App Store</option>
+              <option value="paid_social">Paid Social</option>
+              <option value="influencer">Influencer</option>
+            </select>
+          </div>
+          <div class="data-table-container">
+            <table class="custom-table">
+              <thead>
+                <tr><th>Channel Name</th><th>Signups</th><th>Onboarded %</th><th>First Edit %</th><th>Paid Conv %</th><th>Status</th></tr>
+              </thead>
+              <tbody id="table-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <div class="card-header"><h2 class="card-title">Data Quality & SQL Preview</h2></div>
+          <div id="quality-list"></div>
+          <div class="code-editor-container">
+            <div class="code-header">
+              <span>SQL Query Preview</span>
+              <button onclick="copySQLText('sql-preview')" style="background: transparent; border: none; color: #38bdf8; cursor: pointer; font-size: 11px; font-weight: 700;">Copy SQL</button>
+            </div>
+            <div class="sql-box" id="sql-preview">SELECT channel, COUNT(*) AS signups FROM users GROUP BY channel;</div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- VIEW 2: EXECUTIVE REPORT TAB -->
+    <div id="view-report" class="tab-view" style="display: none;">
+      <section class="chart-card" style="margin-bottom: 24px;">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title">PixelPulse Executive Strategy & Insights Report</h2>
+            <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Prepared for Product Leadership & Executive Stakeholders • SQLite Data Warehouse Stream</div>
+          </div>
+          <button onclick="window.print()" class="btn-primary" style="width: auto; padding: 8px 16px; font-size: 12px;">
+            <span>Export PDF Report</span>
+          </button>
+        </div>
+
+        <div style="font-size: 14px; line-height: 1.7; color: var(--text-primary);">
+          <div class="report-banner">
+            <div style="font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-blue); margin-bottom: 4px;">Executive Summary</div>
+            <div style="font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px;">Growth & Monetization Performance Analysis (6,000 User Cohorts)</div>
+            <p style="color: var(--text-secondary); font-size: 13.5px;">Rigorous statistical evaluation of user signup funnels, channel revenue ROI, retention cohorts, and onboarding experiments conducted across SQLite data warehouse logs.</p>
+          </div>
+
+          <div class="report-grid">
+            <div class="report-card border-blue">
+              <div class="report-card-header">
+                <div class="report-card-title" style="color: #60a5fa;">1. Acquisition Channel Efficiency</div>
+                <span class="badge badge-blue">16.11% Top Conv</span>
+              </div>
+              <p class="report-card-body">
+                <strong>Referral (16.11%)</strong> and <strong>Organic Search (10.45%)</strong> significantly outperform Paid Social (2.99%) and Influencer marketing (2.43%). While Paid Social drives volume, users drop off dramatically before completing onboarding.
+              </p>
+            </div>
+
+            <div class="report-card border-green">
+              <div class="report-card-header">
+                <div class="report-card-title" style="color: #34d399;">2. Unit Economics & LTV ROI</div>
+                <span class="badge badge-green">4.2x LTV Multiplier</span>
+              </div>
+              <p class="report-card-body">
+                Referral signups generate <strong>$4.83 revenue per signup</strong>, compared to Paid Social's <strong>$1.13</strong>. Reallocating marketing ad spend toward viral referral incentives yields 4.2x higher return on customer acquisition costs.
+              </p>
+            </div>
+
+            <div class="report-card border-purple">
+              <div class="report-card-header">
+                <div class="report-card-title" style="color: #c084fc;">3. Onboarding A/B Experimentation</div>
+                <span class="badge badge-purple">p = 0.00010 (Sig)</span>
+              </div>
+              <p class="report-card-body">
+                The <strong>Guided Edit</strong> onboarding variant demonstrated a statistically significant <strong>+4.99 percentage point activation lift</strong> (58.65% activation vs 53.66% control, Z = 3.894). Full 100% production rollout is recommended.
+              </p>
+            </div>
+
+            <div class="report-card border-magenta">
+              <div class="report-card-header">
+                <div class="report-card-title" style="color: #f472b6;">4. Retention & Lifecycle Opportunity</div>
+                <span class="badge badge-green">32.6% Month 3 Plateau</span>
+              </div>
+              <p class="report-card-body">
+                The primary churn risk occurs within the <strong>Day 1–14 window</strong> post-signup before stabilizing at 32.6% in Month 3. Targeted lifecycle re-engagement triggers during Month 0 represent the highest leverage retention opportunity.
+              </p>
+            </div>
+          </div>
+
+          <div class="roadmap-card">
+            <div style="font-size: 15px; font-weight: 800; color: var(--text-primary); margin-bottom: 14px;">Strategic Executive Action Plan</div>
+            <div class="roadmap-item">
+              <div class="roadmap-step">Phase 1 (Immediate)</div>
+              <div><strong>Roll out Guided Edit Onboarding to 100%:</strong> Deploy treatment onboarding flow across all acquisition channels to capture +4.99 pp higher user activation.</div>
+            </div>
+            <div class="roadmap-item">
+              <div class="roadmap-step">Phase 2 (Month 1)</div>
+              <div><strong>Reallocate Acquisition Budget:</strong> Shift 30% of paid ad spend from low-converting Paid Social ($1.13/signup) into Referral incentive programs ($4.83/signup).</div>
+            </div>
+            <div class="roadmap-item">
+              <div class="roadmap-step">Phase 3 (Month 2)</div>
+              <div><strong>Deploy Lifecycle Triggers:</strong> Launch automated email and push notifications on Day 3 and Day 7 to reduce early user churn before Month 1.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- VIEW 3: USER JOURNEY & SESSION EXPLORER -->
+    <div id="view-explorer" class="tab-view" style="display: none;">
+      <section class="chart-card" style="margin-bottom: 24px;">
+        <div class="card-header">
+          <div>
+            <h2 class="card-title">Individual User Session & Event Stream Explorer</h2>
+            <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Inspect granular event streams for user IDs (e.g., 1, 5, 42, 100)</div>
+          </div>
+          <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+            <div style="display: flex; gap: 6px;">
+              <button onclick="inspectSampleUser(1)" class="tab-btn">User 1</button>
+              <button onclick="inspectSampleUser(5)" class="tab-btn">User 5</button>
+              <button onclick="inspectSampleUser(42)" class="tab-btn">User 42</button>
+              <button onclick="inspectSampleUser(100)" class="tab-btn">User 100</button>
+            </div>
+            <input type="text" id="user-id-input" value="1" placeholder="Enter user ID..." style="padding: 8px 14px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-card-subtle); color: var(--text-primary); font-weight: 700; width: 110px; outline: none;">
+            <button onclick="loadUserTimeline()" class="btn-primary" style="width: auto; padding: 8px 16px; font-size: 12px;">
+              <span>Inspect User</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="user-profile-header" style="display: flex; gap: 24px; background: var(--bg-card-subtle); padding: 18px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 24px; flex-wrap: wrap;">
+          <div><span style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase; font-weight: 800;">User ID</span><div id="user-prof-id" style="font-size: 16px; font-weight: 800; color: var(--accent-blue);">user_1</div></div>
+          <div><span style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase; font-weight: 800;">Acquisition Channel</span><div id="user-prof-channel" style="font-size: 16px; font-weight: 800;">Referral</div></div>
+          <div><span style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase; font-weight: 800;">Experiment Group</span><div id="user-prof-group" style="font-size: 16px; font-weight: 800; color: var(--accent-purple);">treatment</div></div>
+          <div><span style="font-size: 11px; color: var(--text-secondary); text-transform: uppercase; font-weight: 800;">Subscription Plan</span><div id="user-prof-plan" style="font-size: 16px; font-weight: 800; color: var(--accent-green-text);">annual ($49.99)</div></div>
+        </div>
+
+        <div style="font-size: 15px; font-weight: 800; color: var(--text-primary); margin-bottom: 16px;">Chronological User Event Stream</div>
+        <div id="user-timeline-container" style="display: flex; flex-direction: column; gap: 12px;"></div>
+      </section>
+    </div>
+
+    <!-- VIEW 4: FUNNEL ANALYTICS -->
+    <div id="view-funnel" class="tab-view" style="display: none;">
+      <section class="kpi-grid">
+        <div class="kpi-card border-blue"><div><div class="kpi-label">Onboarding Completion</div><div class="kpi-value">57.7%</div></div><div class="kpi-trend positive"><span>Top: Referral 73.6%</span></div></div>
+        <div class="kpi-card border-green"><div><div class="kpi-label">Onboard -> First Edit</div><div class="kpi-value">74.0%</div></div><div class="kpi-trend positive"><span>Top: Referral 93.9%</span></div></div>
+        <div class="kpi-card border-purple"><div><div class="kpi-label">Edit -> Trial Started</div><div class="kpi-value">38.3%</div></div><div class="kpi-trend positive"><span>Top: Referral 45.2%</span></div></div>
+        <div class="kpi-card border-magenta"><div><div class="kpi-label">Trial -> Paid Sub</div><div class="kpi-value">43.5%</div></div><div class="kpi-trend positive"><span>Top: Referral 51.5%</span></div></div>
+      </section>
+      
+      <section class="chart-card" style="margin-bottom: 24px;">
+        <div class="card-header"><h2 class="card-title">Full 5-Step Acquisition Funnel Stage Breakdown by Channel</h2></div>
+        <div style="height: 340px; position: relative;"><canvas id="funnelDetailedChart"></canvas></div>
+      </section>
+      
+      <section class="chart-card">
+        <div class="card-header"><h2 class="card-title">Funnel Stage Conversion & Drop-off Matrix</h2></div>
+        <div class="data-table-container">
+          <table class="custom-table">
+            <thead>
+              <tr><th>Channel</th><th>Signups</th><th>Onboarded</th><th>First Edit</th><th>Trialed</th><th>Subscribed</th><th>Overall Conv %</th></tr>
+            </thead>
+            <tbody id="funnel-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <!-- VIEW 5: COHORT RETENTION -->
+    <div id="view-retention" class="tab-view" style="display: none;">
+      <section class="kpi-grid">
+        <div class="kpi-card border-blue"><div><div class="kpi-label">Month 0 Avg Retention</div><div class="kpi-value">45.2%</div></div><div class="kpi-trend positive"><span>Signup Month</span></div></div>
+        <div class="kpi-card border-green"><div><div class="kpi-label">Month 1 Avg Retention</div><div class="kpi-value">48.9%</div></div><div class="kpi-trend positive"><span>Target Window</span></div></div>
+        <div class="kpi-card border-purple"><div><div class="kpi-label">Month 3 Plateau</div><div class="kpi-value">32.6%</div></div><div class="kpi-trend positive"><span>Loyal Base</span></div></div>
+        <div class="kpi-card border-magenta"><div><div class="kpi-label">Biggest Retention Cliff</div><div class="kpi-value">Day 1-14</div></div><div class="kpi-trend negative"><span>Push Window</span></div></div>
+      </section>
+
+      <section class="chart-card" style="margin-bottom: 24px;">
+        <div class="card-header"><h2 class="card-title">Average Cohort Retention Curve Across 2025 Signups</h2></div>
+        <div style="height: 320px; position: relative;"><canvas id="retentionChartDetail"></canvas></div>
+      </section>
+
+      <section class="chart-card">
+        <div class="card-header"><h2 class="card-title">Monthly Cohort Retention Heatmap Matrix (% Active)</h2></div>
+        <div class="data-table-container">
+          <table class="custom-table">
+            <thead>
+              <tr><th>Cohort Month</th><th>Cohort Size ($N$)</th><th>Month 0 %</th><th>Month 1 %</th><th>Month 2 %</th><th>Month 3 %</th></tr>
+            </thead>
+            <tbody id="cohort-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <!-- VIEW 6: A/B EXPERIMENT -->
+    <div id="view-abtest" class="tab-view" style="display: none;">
+      <section class="kpi-grid">
+        <div class="kpi-card border-blue"><div><div class="kpi-label">Control (Self-Serve)</div><div class="kpi-value">53.66%</div></div><div class="kpi-trend"><span>N = 2,989</span></div></div>
+        <div class="kpi-card border-green"><div><div class="kpi-label">Treatment (Guided Edit)</div><div class="kpi-value">58.65%</div></div><div class="kpi-trend positive"><span>N = 3,011</span></div></div>
+        <div class="kpi-card border-purple"><div><div class="kpi-label">Absolute Lift</div><div class="kpi-value">+4.99 pp</div></div><div class="kpi-trend positive"><span>+9.30% Relative</span></div></div>
+        <div class="kpi-card border-magenta"><div><div class="kpi-label">Z-Stat & P-Value</div><div class="kpi-value">Z=3.894</div></div><div class="kpi-trend positive"><span>p=0.00010 (Sig)</span></div></div>
+      </section>
+
+      <section class="dashboard-grid">
+        <div class="chart-card">
+          <div class="card-header"><h2 class="card-title">Onboarding Activation Rate Comparison</h2></div>
+          <div style="height: 300px; position: relative;"><canvas id="abChartDetail"></canvas></div>
+        </div>
+
+        <div class="chart-card">
+          <div class="card-header"><h2 class="card-title">A/B Test Decision & Ship Readout</h2></div>
+          <div style="padding: 10px 0;">
+            <div style="background: rgba(16, 185, 129, 0.12); border-left: 4px solid #10b981; padding: 16px; border-radius: 8px; margin-bottom: 16px;">
+              <h3 style="font-size: 15px; color: #34d399; margin-bottom: 4px; font-weight: 800;">RECOMMENDATION: SHIP TO 100%</h3>
+              <p style="font-size: 13px; color: #a7f3d0;">Statistically significant lift at 99.9% confidence level. Guided edit onboarding increases user activation by +4.99 pp.</p>
+            </div>
+            <div style="font-size: 13px; line-height: 1.8; color: var(--text-secondary);">
+              <div>• <strong>95% Confidence Interval:</strong> [+2.48 pp, +7.50 pp]</div>
+              <div>• <strong>Cohen's h Effect Size:</strong> 0.1006 (Small to Medium)</div>
+              <div>• <strong>Statistical Power:</strong> 99.8%</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive Z-Test Calculator Simulator -->
+      <section class="chart-card" style="margin-top: 24px;">
+        <div class="card-header"><h2 class="card-title">Interactive Statistical Z-Test Simulator</h2></div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+          <div>
+            <label style="font-size: 12px; font-weight: 700; color: var(--text-secondary);">Control Activation Rate (%): <span id="calc-p1-val" style="color: var(--accent-blue);">53.66</span>%</label>
+            <input type="range" id="calc-p1" min="30" max="80" value="53.66" step="0.1" style="margin: 8px 0 20px 0;" oninput="updateZCalculator()">
+            
+            <label style="font-size: 12px; font-weight: 700; color: var(--text-secondary);">Treatment Activation Rate (%): <span id="calc-p2-val" style="color: var(--accent-green);">58.65</span>%</label>
+            <input type="range" id="calc-p2" min="30" max="80" value="58.65" step="0.1" style="margin: 8px 0;" oninput="updateZCalculator()">
+          </div>
+          <div style="background: var(--bg-card-subtle); padding: 20px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: center;">
+            <div style="font-size: 14px; font-weight: 700; color: var(--text-secondary);">Calculated Z-Statistic: <strong id="calc-z" style="color: var(--accent-blue); font-size: 16px;">3.894</strong></div>
+            <div style="font-size: 14px; font-weight: 700; color: var(--text-secondary); margin-top: 8px;">Calculated P-Value: <strong id="calc-p" style="color: var(--accent-green); font-size: 16px;">0.00010</strong></div>
+            <div style="font-size: 14px; font-weight: 700; color: var(--text-secondary); margin-top: 8px;">Significance Status: <strong id="calc-sig" style="color: var(--accent-green); font-size: 15px;">SIGNIFICANT (p < 0.05)</strong></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- VIEW 7: SQL WORKBENCH (LIVE EDITABLE & API EXECUTOR) -->
+    <div id="view-sql" class="tab-view" style="display: none;">
+      <section class="chart-card" style="margin-bottom: 24px;">
+        <div class="card-header">
+          <h2 class="card-title">PixelPulse Portfolio SQL Workbench & Live Query Runner</h2>
+          <select id="query-select" onchange="loadSelectedQuery()" style="padding: 10px 16px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-card); font-weight: 700; color: var(--text-primary); outline: none;">
+            <option value="funnel">1. Signup -> Paid Funnel by Channel</option>
+            <option value="cohort">2. Monthly Cohort Retention Table</option>
+            <option value="ab_test">3. A/B Test Activation Readout</option>
+            <option value="revenue">4. Revenue Segmentation by Channel</option>
+          </select>
+        </div>
+
+        <div class="code-editor-container">
+          <div class="code-header">
+            <span>SQL Query Source Code (Live Editable SQLite Editor)</span>
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <button onclick="formatSQLCode()" style="background: transparent; border: none; color: #fbbf24; cursor: pointer; font-size: 12px; font-weight: 700;">Prettify SQL</button>
+              <button onclick="downloadCSVResults()" style="background: transparent; border: none; color: #34d399; cursor: pointer; font-size: 12px; font-weight: 700;">Download CSV</button>
+              <button onclick="copySQLText('sql-workbench-code')" style="background: transparent; border: none; color: #38bdf8; cursor: pointer; font-size: 12px; font-weight: 700;">Copy SQL</button>
+              <button onclick="explainQueryPlan()" style="background: rgba(192, 132, 252, 0.2); border: 1px solid #c084fc; color: #c084fc; border-radius: 6px; padding: 6px 12px; cursor: pointer; font-size: 12px; font-weight: 700;">Explain Plan</button>
+              <button onclick="runUserSQLQuery()" class="btn-primary" style="width: auto; padding: 6px 14px; font-size: 12px;">
+                <span>▶ Run SQL Query</span>
+              </button>
+            </div>
+          </div>
+          <!-- Editable Textarea for live typing/editing of SQL queries -->
+          <textarea class="sql-editable-box" id="sql-workbench-code" spellcheck="false" placeholder="Type custom SQL query here (e.g. SELECT * FROM users LIMIT 10;)..."></textarea>
+        </div>
+      </section>
+
+      <!-- EXPLAIN QUERY PLAN RESULT CONTAINER -->
+      <div id="explain-plan-card" class="chart-card" style="display: none; margin-bottom: 24px; border: 1px solid var(--accent-purple);">
+        <div class="card-header">
+          <h2 class="card-title" style="color: var(--accent-purple);">SQLite EXPLAIN QUERY PLAN Inspector Output</h2>
+          <button onclick="document.getElementById('explain-plan-card').style.display='none'" style="background: transparent; border: none; color: var(--text-secondary); cursor: pointer; font-size: 14px;">✕ Close</button>
+        </div>
+        <div class="data-table-container">
+          <table class="custom-table" id="explain-table">
+            <thead><tr><th>ID</th><th>SELECTID</th><th>ORDER</th><th>FROM</th><th>EXECUTION PLAN DETAILS</th></tr></thead>
+            <tbody id="explain-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <section class="chart-card">
+        <div class="card-header"><h2 class="card-title">Query Result Output Matrix</h2></div>
+        <div class="data-table-container">
+          <table class="custom-table" id="sql-result-table">
+            <thead id="sql-table-head"></thead>
+            <tbody id="sql-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <!-- VIEW 8: DATA QUALITY -->
+    <div id="view-quality" class="tab-view" style="display: none;">
+      <section class="kpi-grid">
+        <div class="kpi-card border-green"><div><div class="kpi-label">Integrity Status</div><div class="kpi-value" style="color: var(--accent-green);">5/5 PASSED</div></div><div class="kpi-trend positive"><span>100% Healthy</span></div></div>
+        <div class="kpi-card border-blue"><div><div class="kpi-label">Users Table Rows</div><div class="kpi-value">6,000</div></div><div class="kpi-trend positive"><span>PK Unique</span></div></div>
+        <div class="kpi-card border-purple"><div><div class="kpi-label">Events Table Rows</div><div class="kpi-value">41,613</div></div><div class="kpi-trend positive"><span>0 Orphans</span></div></div>
+        <div class="kpi-card border-magenta"><div><div class="kpi-label">Subscriptions Rows</div><div class="kpi-value">456</div></div><div class="kpi-trend positive"><span>0 Orphans</span></div></div>
+      </section>
+
+      <section class="chart-card">
+        <div class="card-header"><h2 class="card-title">Data Quality Assurance Suite Results</h2></div>
+        <div class="data-table-container">
+          <table class="custom-table">
+            <thead>
+              <tr><th>Data Quality Rule Name</th><th>Target Table</th><th>Execution Status</th><th>Validation Result Details</th></tr>
+            </thead>
+            <tbody>
+              <tr><td style="font-weight: 700;">User Primary Key Uniqueness</td><td>users</td><td><span class="status-pill status-active">PASSED</span></td><td>0 duplicate user_ids found across 6,000 records.</td></tr>
+              <tr><td style="font-weight: 700;">Events Foreign Key Integrity</td><td>events</td><td><span class="status-pill status-active">PASSED</span></td><td>0 orphan event records found (all events map to valid users).</td></tr>
+              <tr><td style="font-weight: 700;">Subscriptions Foreign Key Integrity</td><td>subscriptions</td><td><span class="status-pill status-active">PASSED</span></td><td>0 orphan subscription records found.</td></tr>
+              <tr><td style="font-weight: 700;">Event Temporal Consistency</td><td>events, users</td><td><span class="status-pill status-active">PASSED</span></td><td>All events occur after or on user signup date.</td></tr>
+              <tr><td style="font-weight: 700;">Mandatory Non-Null Constraints</td><td>users, events, subs</td><td><span class="status-pill status-active">PASSED</span></td><td>0 null values in mandatory fields.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Script -->
+  <script src="app.js"></script>
+</body>
+</html>

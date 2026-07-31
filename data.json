@@ -1,0 +1,519 @@
+{
+  "project_name": "PixelPulse",
+  "summary": {
+    "total_signups": 6000,
+    "total_revenue": 14775.44,
+    "total_paying_users": 456,
+    "overall_conversion_pct": 7.6,
+    "ab_lift_pp": 4.99,
+    "ab_p_value": 0.0001,
+    "ab_is_significant": true,
+    "dq_all_passed": true,
+    "avg_churn_risk_pct": 58.4,
+    "high_churn_users_count": 2630
+  },
+  "funnel": [
+    {
+      "channel": "referral",
+      "signups": 956,
+      "onboarded": 704,
+      "pct_onboarded": 73.6,
+      "edited": 661,
+      "pct_onboarded_to_edit": 93.9,
+      "trialed": 299,
+      "pct_edit_to_trial": 45.2,
+      "subscribed": 154,
+      "pct_trial_to_paid": 51.5,
+      "overall_conversion_pct": 16.11
+    },
+    {
+      "channel": "organic_search",
+      "signups": 1790,
+      "onboarded": 1182,
+      "pct_onboarded": 66.0,
+      "edited": 961,
+      "pct_onboarded_to_edit": 81.3,
+      "trialed": 394,
+      "pct_edit_to_trial": 41.0,
+      "subscribed": 187,
+      "pct_trial_to_paid": 47.5,
+      "overall_conversion_pct": 10.45
+    },
+    {
+      "channel": "app_store_featured",
+      "signups": 594,
+      "onboarded": 361,
+      "pct_onboarded": 60.8,
+      "edited": 268,
+      "pct_onboarded_to_edit": 74.2,
+      "trialed": 103,
+      "pct_edit_to_trial": 38.4,
+      "subscribed": 41,
+      "pct_trial_to_paid": 39.8,
+      "overall_conversion_pct": 6.9
+    },
+    {
+      "channel": "paid_social",
+      "signups": 1673,
+      "onboarded": 725,
+      "pct_onboarded": 43.3,
+      "edited": 414,
+      "pct_onboarded_to_edit": 57.1,
+      "trialed": 128,
+      "pct_edit_to_trial": 30.9,
+      "subscribed": 50,
+      "pct_trial_to_paid": 39.1,
+      "overall_conversion_pct": 2.99
+    },
+    {
+      "channel": "influencer",
+      "signups": 987,
+      "onboarded": 398,
+      "pct_onboarded": 40.3,
+      "edited": 209,
+      "pct_onboarded_to_edit": 52.5,
+      "trialed": 58,
+      "pct_edit_to_trial": 27.8,
+      "subscribed": 24,
+      "pct_trial_to_paid": 41.4,
+      "overall_conversion_pct": 2.43
+    }
+  ],
+  "cohort": [
+    {
+      "cohort_month": "2025-01",
+      "cohort_users": 129,
+      "month_number": 0,
+      "retained_users": 42,
+      "retention_pct": 32.6
+    },
+    {
+      "cohort_month": "2025-01",
+      "cohort_users": 129,
+      "month_number": 1,
+      "retained_users": 64,
+      "retention_pct": 49.6
+    },
+    {
+      "cohort_month": "2025-01",
+      "cohort_users": 129,
+      "month_number": 2,
+      "retained_users": 45,
+      "retention_pct": 34.9
+    },
+    {
+      "cohort_month": "2025-01",
+      "cohort_users": 129,
+      "month_number": 3,
+      "retained_users": 41,
+      "retention_pct": 31.8
+    },
+    {
+      "cohort_month": "2025-02",
+      "cohort_users": 203,
+      "month_number": 0,
+      "retained_users": 127,
+      "retention_pct": 62.6
+    },
+    {
+      "cohort_month": "2025-02",
+      "cohort_users": 203,
+      "month_number": 1,
+      "retained_users": 98,
+      "retention_pct": 48.3
+    },
+    {
+      "cohort_month": "2025-02",
+      "cohort_users": 203,
+      "month_number": 2,
+      "retained_users": 74,
+      "retention_pct": 36.5
+    },
+    {
+      "cohort_month": "2025-02",
+      "cohort_users": 203,
+      "month_number": 3,
+      "retained_users": 68,
+      "retention_pct": 33.5
+    },
+    {
+      "cohort_month": "2025-03",
+      "cohort_users": 268,
+      "month_number": 0,
+      "retained_users": 89,
+      "retention_pct": 33.2
+    },
+    {
+      "cohort_month": "2025-03",
+      "cohort_users": 268,
+      "month_number": 1,
+      "retained_users": 128,
+      "retention_pct": 47.8
+    },
+    {
+      "cohort_month": "2025-03",
+      "cohort_users": 268,
+      "month_number": 2,
+      "retained_users": 97,
+      "retention_pct": 36.2
+    },
+    {
+      "cohort_month": "2025-03",
+      "cohort_users": 268,
+      "month_number": 3,
+      "retained_users": 80,
+      "retention_pct": 29.9
+    },
+    {
+      "cohort_month": "2025-04",
+      "cohort_users": 358,
+      "month_number": 0,
+      "retained_users": 208,
+      "retention_pct": 58.1
+    },
+    {
+      "cohort_month": "2025-04",
+      "cohort_users": 358,
+      "month_number": 2,
+      "retained_users": 163,
+      "retention_pct": 45.5
+    },
+    {
+      "cohort_month": "2025-05",
+      "cohort_users": 426,
+      "month_number": 0,
+      "retained_users": 180,
+      "retention_pct": 42.3
+    },
+    {
+      "cohort_month": "2025-05",
+      "cohort_users": 426,
+      "month_number": 1,
+      "retained_users": 211,
+      "retention_pct": 49.5
+    },
+    {
+      "cohort_month": "2025-05",
+      "cohort_users": 426,
+      "month_number": 2,
+      "retained_users": 171,
+      "retention_pct": 40.1
+    },
+    {
+      "cohort_month": "2025-05",
+      "cohort_users": 426,
+      "month_number": 3,
+      "retained_users": 127,
+      "retention_pct": 29.8
+    },
+    {
+      "cohort_month": "2025-06",
+      "cohort_users": 473,
+      "month_number": 0,
+      "retained_users": 266,
+      "retention_pct": 56.2
+    },
+    {
+      "cohort_month": "2025-06",
+      "cohort_users": 473,
+      "month_number": 2,
+      "retained_users": 194,
+      "retention_pct": 41.0
+    },
+    {
+      "cohort_month": "2025-06",
+      "cohort_users": 473,
+      "month_number": 3,
+      "retained_users": 160,
+      "retention_pct": 33.8
+    },
+    {
+      "cohort_month": "2025-07",
+      "cohort_users": 522,
+      "month_number": 0,
+      "retained_users": 230,
+      "retention_pct": 44.1
+    },
+    {
+      "cohort_month": "2025-07",
+      "cohort_users": 522,
+      "month_number": 1,
+      "retained_users": 275,
+      "retention_pct": 52.7
+    },
+    {
+      "cohort_month": "2025-07",
+      "cohort_users": 522,
+      "month_number": 2,
+      "retained_users": 215,
+      "retention_pct": 41.2
+    },
+    {
+      "cohort_month": "2025-07",
+      "cohort_users": 522,
+      "month_number": 3,
+      "retained_users": 179,
+      "retention_pct": 34.3
+    },
+    {
+      "cohort_month": "2025-08",
+      "cohort_users": 624,
+      "month_number": 0,
+      "retained_users": 235,
+      "retention_pct": 37.7
+    },
+    {
+      "cohort_month": "2025-08",
+      "cohort_users": 624,
+      "month_number": 1,
+      "retained_users": 288,
+      "retention_pct": 46.2
+    },
+    {
+      "cohort_month": "2025-08",
+      "cohort_users": 624,
+      "month_number": 2,
+      "retained_users": 236,
+      "retention_pct": 37.8
+    },
+    {
+      "cohort_month": "2025-08",
+      "cohort_users": 624,
+      "month_number": 3,
+      "retained_users": 196,
+      "retention_pct": 31.4
+    },
+    {
+      "cohort_month": "2025-09",
+      "cohort_users": 667,
+      "month_number": 0,
+      "retained_users": 362,
+      "retention_pct": 54.3
+    },
+    {
+      "cohort_month": "2025-09",
+      "cohort_users": 667,
+      "month_number": 2,
+      "retained_users": 273,
+      "retention_pct": 40.9
+    },
+    {
+      "cohort_month": "2025-10",
+      "cohort_users": 719,
+      "month_number": 0,
+      "retained_users": 279,
+      "retention_pct": 38.8
+    },
+    {
+      "cohort_month": "2025-10",
+      "cohort_users": 719,
+      "month_number": 1,
+      "retained_users": 325,
+      "retention_pct": 45.2
+    },
+    {
+      "cohort_month": "2025-10",
+      "cohort_users": 719,
+      "month_number": 2,
+      "retained_users": 272,
+      "retention_pct": 37.8
+    },
+    {
+      "cohort_month": "2025-11",
+      "cohort_users": 785,
+      "month_number": 0,
+      "retained_users": 402,
+      "retention_pct": 51.2
+    },
+    {
+      "cohort_month": "2025-12",
+      "cohort_users": 826,
+      "month_number": 0,
+      "retained_users": 373,
+      "retention_pct": 45.2
+    }
+  ],
+  "ab_test": {
+    "groups": [
+      {
+        "experiment_group": "control_self_serve",
+        "users_in_group": 2989,
+        "activated_users": 1604,
+        "activation_rate_pct": 53.66
+      },
+      {
+        "experiment_group": "treatment_guided_edit",
+        "users_in_group": 3011,
+        "activated_users": 1766,
+        "activation_rate_pct": 58.65
+      }
+    ],
+    "result": {
+      "n_control": 2989,
+      "n_treatment": 3011,
+      "p_control": 53.66,
+      "p_treatment": 58.65,
+      "abs_lift_pp": 4.99,
+      "rel_lift_pct": 9.3,
+      "ci_lower_pp": 2.48,
+      "ci_upper_pp": 7.5,
+      "z_stat": 3.894,
+      "p_value": 0.0001,
+      "cohens_h": 0.1006,
+      "is_significant": true
+    }
+  },
+  "revenue": [
+    {
+      "channel": "referral",
+      "total_signups": 956,
+      "paying_users": 154,
+      "total_revenue_usd": 4618.46,
+      "revenue_per_signup_usd": 4.831,
+      "pct_revenue_from_annual": 76.2
+    },
+    {
+      "channel": "organic_search",
+      "total_signups": 1790,
+      "paying_users": 187,
+      "total_revenue_usd": 6138.13,
+      "revenue_per_signup_usd": 3.429,
+      "pct_revenue_from_annual": 79.5
+    },
+    {
+      "channel": "app_store_featured",
+      "total_signups": 594,
+      "paying_users": 41,
+      "total_revenue_usd": 1109.59,
+      "revenue_per_signup_usd": 1.868,
+      "pct_revenue_from_annual": 72.1
+    },
+    {
+      "channel": "paid_social",
+      "total_signups": 1673,
+      "paying_users": 50,
+      "total_revenue_usd": 1899.5,
+      "revenue_per_signup_usd": 1.135,
+      "pct_revenue_from_annual": 84.2
+    },
+    {
+      "channel": "influencer",
+      "total_signups": 987,
+      "paying_users": 24,
+      "total_revenue_usd": 1009.76,
+      "revenue_per_signup_usd": 1.023,
+      "pct_revenue_from_annual": 87.1
+    }
+  ],
+  "queries": {
+    "funnel": "WITH funnel AS (\n    SELECT\n        u.channel,\n        COUNT(DISTINCT u.user_id) AS signups,\n        COUNT(DISTINCT CASE WHEN e.event_name = 'onboarding_complete' THEN e.user_id END) AS onboarded,\n        COUNT(DISTINCT CASE WHEN e.event_name = 'first_edit' THEN e.user_id END) AS edited,\n        COUNT(DISTINCT CASE WHEN e.event_name = 'trial_started' THEN e.user_id END) AS trialed,\n        COUNT(DISTINCT CASE WHEN e.event_name = 'subscribed' THEN e.user_id END) AS subscribed\n    FROM users u\n    LEFT JOIN events e ON u.user_id = e.user_id\n    GROUP BY u.channel\n)\nSELECT\n    channel,\n    signups,\n    onboarded,\n    ROUND(100.0 * onboarded / signups, 1)   AS pct_onboarded,\n    edited,\n    ROUND(100.0 * edited / NULLIF(onboarded, 0), 1) AS pct_onboarded_to_edit,\n    trialed,\n    ROUND(100.0 * trialed / NULLIF(edited, 0), 1)   AS pct_edit_to_trial,\n    subscribed,\n    ROUND(100.0 * subscribed / NULLIF(trialed, 0), 1) AS pct_trial_to_paid,\n    ROUND(100.0 * subscribed / signups, 2) AS overall_conversion_pct\nFROM funnel\nORDER BY overall_conversion_pct DESC",
+    "cohort": "WITH cohort AS (\n    SELECT\n        user_id,\n        strftime('%Y-%m', signup_date) AS cohort_month,\n        signup_date\n    FROM users\n),\nactivity AS (\n    SELECT\n        e.user_id,\n        c.cohort_month,\n        c.signup_date,\n        e.event_date,\n        CAST(\n            (julianday(strftime('%Y-%m-01', e.event_date)) - julianday(strftime('%Y-%m-01', c.signup_date)))\n            / 30.4\n            AS INTEGER\n        ) AS month_number\n    FROM events e\n    JOIN cohort c ON e.user_id = c.user_id\n    WHERE e.event_name = 'app_open'\n),\ncohort_size AS (\n    SELECT cohort_month, COUNT(DISTINCT user_id) AS cohort_users\n    FROM cohort\n    GROUP BY cohort_month\n),\nretained AS (\n    SELECT cohort_month, month_number, COUNT(DISTINCT user_id) AS retained_users\n    FROM activity\n    WHERE month_number BETWEEN 0 AND 3\n    GROUP BY cohort_month, month_number\n)\nSELECT\n    r.cohort_month,\n    cs.cohort_users,\n    r.month_number,\n    r.retained_users,\n    ROUND(100.0 * r.retained_users / cs.cohort_users, 1) AS retention_pct\nFROM retained r\nJOIN cohort_size cs ON r.cohort_month = cs.cohort_month\nORDER BY r.cohort_month, r.month_number",
+    "ab_test": "SELECT\n    u.experiment_group,\n    COUNT(DISTINCT u.user_id) AS users_in_group,\n    COUNT(DISTINCT CASE WHEN e.event_name = 'onboarding_complete' THEN e.user_id END) AS activated_users,\n    ROUND(\n        100.0 * COUNT(DISTINCT CASE WHEN e.event_name = 'onboarding_complete' THEN e.user_id END)\n        / COUNT(DISTINCT u.user_id), 2\n    ) AS activation_rate_pct\nFROM users u\nLEFT JOIN events e ON u.user_id = e.user_id\nGROUP BY u.experiment_group",
+    "revenue": "SELECT\n    u.channel,\n    COUNT(DISTINCT u.user_id) AS total_signups,\n    COUNT(DISTINCT s.user_id) AS paying_users,\n    ROUND(SUM(s.price_usd), 2) AS total_revenue_usd,\n    ROUND(SUM(s.price_usd) / COUNT(DISTINCT u.user_id), 3) AS revenue_per_signup_usd,\n    ROUND(SUM(CASE WHEN s.plan = 'annual' THEN s.price_usd ELSE 0 END)\n          / NULLIF(SUM(s.price_usd), 0) * 100, 1) AS pct_revenue_from_annual\nFROM users u\nLEFT JOIN subscriptions s ON u.user_id = s.user_id\nGROUP BY u.channel\nORDER BY revenue_per_signup_usd DESC"
+  },
+  "data_quality": [
+    {
+      "check_name": "User Primary Key Uniqueness",
+      "passed": true,
+      "details": "0 duplicate user_ids found."
+    },
+    {
+      "check_name": "Events Foreign Key Integrity",
+      "passed": true,
+      "details": "0 orphan event records."
+    },
+    {
+      "check_name": "Subscriptions Foreign Key Integrity",
+      "passed": true,
+      "details": "0 orphan subscription records."
+    },
+    {
+      "check_name": "Event Temporal Consistency",
+      "passed": true,
+      "details": "All events occur after or on signup date."
+    },
+    {
+      "check_name": "Mandatory Fields Non-Null Constraint",
+      "passed": true,
+      "details": "0 null values in mandatory fields."
+    }
+  ],
+  "churn": {
+    "high_risk_count": 2630,
+    "medium_risk_count": 857,
+    "low_risk_count": 2513,
+    "avg_churn_risk_pct": 58.4,
+    "at_risk_users": [
+      {
+        "user_id": 5991,
+        "channel": "app_store_featured",
+        "risk_score": 94.0,
+        "has_onboarded": 0,
+        "has_edited": 0
+      },
+      {
+        "user_id": 5993,
+        "channel": "influencer",
+        "risk_score": 94.0,
+        "has_onboarded": 0,
+        "has_edited": 0
+      },
+      {
+        "user_id": 5996,
+        "channel": "influencer",
+        "risk_score": 94.0,
+        "has_onboarded": 0,
+        "has_edited": 0
+      },
+      {
+        "user_id": 5998,
+        "channel": "paid_social",
+        "risk_score": 94.0,
+        "has_onboarded": 0,
+        "has_edited": 0
+      },
+      {
+        "user_id": 5556,
+        "channel": "paid_social",
+        "risk_score": 94.0,
+        "has_onboarded": 0,
+        "has_edited": 0
+      },
+      {
+        "user_id": 38,
+        "channel": "organic_search",
+        "risk_score": 94.0,
+        "has_onboarded": 0,
+        "has_edited": 0
+      },
+      {
+        "user_id": 39,
+        "channel": "organic_search",
+        "risk_score": 94.0,
+        "has_onboarded": 0,
+        "has_edited": 0
+      },
+      {
+        "user_id": 41,
+        "channel": "paid_social",
+        "risk_score": 94.0,
+        "has_onboarded": 0,
+        "has_edited": 0
+      },
+      {
+        "user_id": 43,
+        "channel": "influencer",
+        "risk_score": 94.0,
+        "has_onboarded": 0,
+        "has_edited": 0
+      },
+      {
+        "user_id": 44,
+        "channel": "app_store_featured",
+        "risk_score": 94.0,
+        "has_onboarded": 0,
+        "has_edited": 0
+      }
+    ]
+  }
+}

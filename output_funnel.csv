@@ -1,0 +1,6 @@
+channel,signups,onboarded,pct_onboarded,edited,pct_onboarded_to_edit,trialed,pct_edit_to_trial,subscribed,pct_trial_to_paid,overall_conversion_pct
+referral,956,704,73.6,661,93.9,299,45.2,154,51.5,16.11
+organic_search,1790,1182,66.0,961,81.3,394,41.0,187,47.5,10.45
+app_store_featured,594,361,60.8,268,74.2,103,38.4,41,39.8,6.9
+paid_social,1673,725,43.3,414,57.1,128,30.9,50,39.1,2.99
+influencer,987,398,40.3,209,52.5,58,27.8,24,41.4,2.43

@@ -1,0 +1,9 @@
+Control activation:   53.66% (n=2989)
+Treatment activation: 58.65% (n=3011)
+Absolute lift:        +4.99 pp
+Relative lift:        +9.30%
+95% Confidence Int.:  [2.48 pp, 7.50 pp]
+z-statistic:          3.894
+p-value:              0.00010
+Cohen's h:            0.1006
+Result:               SIGNIFICANT at 95% confidence level
