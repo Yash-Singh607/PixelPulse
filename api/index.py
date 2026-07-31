@@ -1,5 +1,6 @@
 """
-Vercel Serverless Function Handler for PixelPulse API (/api/query, /api/explain, /api/user_timeline).
+Vercel Serverless Function Handler for PixelPulse Web App & API.
+Supports GET requests for static frontend files and POST requests for live SQLite API.
 """
 
 from http.server import BaseHTTPRequestHandler
@@ -19,11 +20,42 @@ from config import DB_PATH
 
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
-        self.send_response(200)
-        self.send_header("Content-Type", "application/json")
-        self.send_header("Access-Control-Allow-Origin", "*")
-        self.end_headers()
-        self.wfile.write(json.dumps({"status": "healthy", "service": "PixelPulse API"}).encode("utf-8"))
+        clean_path = self.path.split("?")[0]
+        if clean_path in ("/", ""):
+            clean_path = "/index.html"
+
+        file_path = root_dir / clean_path.lstrip("/")
+
+        if file_path.exists() and file_path.is_file():
+            content_types = {
+                ".html": "text/html; charset=utf-8",
+                ".css": "text/css; charset=utf-8",
+                ".js": "application/javascript; charset=utf-8",
+                ".json": "application/json",
+                ".png": "image/png",
+                ".svg": "image/svg+xml",
+                ".ico": "image/x-icon"
+            }
+            ext = file_path.suffix.lower()
+            content_type = content_types.get(ext, "text/html; charset=utf-8")
+
+            self.send_response(200)
+            self.send_header("Content-Type", content_type)
+            self.send_header("Content-Disposition", "inline")
+            self.send_header("Cache-Control", "no-cache")
+            self.end_headers()
+
+            with open(file_path, "rb") as f:
+                self.wfile.write(f.read())
+        else:
+            # Fallback to index.html if file not found
+            index_path = root_dir / "index.html"
+            self.send_response(200)
+            self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.send_header("Content-Disposition", "inline")
+            self.end_headers()
+            with open(index_path, "rb") as f:
+                self.wfile.write(f.read())
 
     def do_POST(self):
         db = DatabaseEngine(db_path=DB_PATH)
