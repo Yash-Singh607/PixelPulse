@@ -22,4 +22,4 @@ python_files = ["test_*.py"]
 addopts = "-v"
 
 [tool.vercel]
-entrypoint = "api.index:handler"
+entrypoint = "api.query:handler"
