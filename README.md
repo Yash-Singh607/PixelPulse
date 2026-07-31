@@ -3,6 +3,7 @@
   # ⚡ PixelPulse AI
   ### Enterprise Product Analytics & Live SQL Data Warehouse Platform
 
+  [![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel_Cloud-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://pixel-pulse-omega.vercel.app/)
   [![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
   [![SQLite](https://img.shields.io/badge/SQLite-WAL_Mode-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://sqlite.org)
   [![PyTest](https://img.shields.io/badge/PyTest-10%2F10_Passed-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white)](https://pytest.org)
@@ -14,7 +15,7 @@
     Engineered to model 6,000 user signup cohorts, 41,600+ event logs, statistical A/B testing engines, automated data quality suites, and machine learning predictive churn scoring for a freemium SaaS application.
   </p>
 
-  [Live Local Server](http://localhost:8000) • [Architecture](#-architecture-overview) • [A/B Testing Math](#-statistical-ab-testing-methodology) • [API Spec](#-live-rest-api-specification)
+  [🚀 Live Production Demo](https://pixel-pulse-omega.vercel.app/) • [Live Local Server](http://localhost:8000) • [Architecture](#-architecture-overview) • [A/B Testing Math](#-statistical-ab-testing-methodology) • [API Spec](#-live-rest-api-specification)
 
 </div>
 
