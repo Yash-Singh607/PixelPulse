@@ -5,6 +5,7 @@ Unified Command Line Interface & Backend API Server for PixelPulse Product Analy
 import argparse
 import json
 import http.server
+import os
 import socketserver
 import sys
 import time
@@ -166,8 +167,10 @@ def cmd_test(args):
 
 
 def cmd_dashboard(args):
-    """Launches local web server with backend SQLite query API for the PixelPulse Web Dashboard UI."""
-    port = getattr(args, "port", 8000)
+    """Launches web server with backend SQLite query API for the PixelPulse Web Dashboard UI."""
+    port_env = os.environ.get("PORT")
+    port = int(port_env) if port_env else getattr(args, "port", 8000)
+
     cmd_analyze(args)
 
     class CustomHandler(http.server.SimpleHTTPRequestHandler):
@@ -240,9 +243,9 @@ def cmd_dashboard(args):
             self.end_headers()
             self.wfile.write(json.dumps(data).encode("utf-8"))
 
-    url = f"http://localhost:{port}"
-    print(f"\n[+] Launching PixelPulse AI Web Dashboard & Live SQLite API at {url}...")
-    webbrowser.open(url)
+    print(f"\n[+] Launching PixelPulse AI Web Dashboard & Live SQLite API on port {port}...")
+    if "PORT" not in os.environ:
+        webbrowser.open(f"http://localhost:{port}")
 
     with socketserver.TCPServer(("", port), CustomHandler) as httpd:
         try:
