@@ -1,11 +1,13 @@
 """
-Vercel Serverless Function Handler for PixelPulse API (/api/query, /api/explain, /api/user_timeline).
+Vercel Serverless Function Handler for PixelPulse Web App & API.
+Supports GET requests for static frontend files and POST requests for live SQLite API.
 """
 
 from http.server import BaseHTTPRequestHandler
 import json
-import time
+import os
 import sys
+import time
 from pathlib import Path
 
 # Add root directory to sys.path
@@ -17,6 +19,39 @@ from config import DB_PATH
 
 
 class handler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        clean_path = self.path.split("?")[0]
+        if clean_path == "/":
+            clean_path = "/index.html"
+
+        file_path = root_dir / clean_path.lstrip("/")
+
+        if file_path.exists() and file_path.is_file():
+            content_types = {
+                ".html": "text/html",
+                ".css": "text/css",
+                ".js": "application/javascript",
+                ".json": "application/json",
+                ".png": "image/png",
+                ".svg": "image/svg+xml",
+                ".ico": "image/x-icon"
+            }
+            ext = file_path.suffix.lower()
+            content_type = content_types.get(ext, "application/octet-stream")
+
+            self.send_response(200)
+            self.send_header("Content-Type", content_type)
+            self.send_header("Cache-Control", "public, max-age=3600")
+            self.end_headers()
+
+            with open(file_path, "rb") as f:
+                self.wfile.write(f.read())
+        else:
+            self.send_response(404)
+            self.send_header("Content-Type", "text/plain")
+            self.end_headers()
+            self.wfile.write(b"404 Not Found")
+
     def do_POST(self):
         db = DatabaseEngine(db_path=DB_PATH)
         content_length = int(self.headers.get("Content-Length", 0))
