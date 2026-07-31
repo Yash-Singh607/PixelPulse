@@ -1,16 +1,12 @@
 """
-Vercel Serverless Function Handler for PixelPulse Web App & API.
-Supports GET requests for static frontend files and POST requests for live SQLite API.
+Vercel WSGI Serverless Function Handler for PixelPulse API.
 """
 
-from http.server import BaseHTTPRequestHandler
 import json
-import os
-import sys
 import time
+import sys
 from pathlib import Path
 
-# Add root directory to sys.path
 root_dir = Path(__file__).parent.parent
 sys.path.insert(0, str(root_dir))
 
@@ -18,62 +14,36 @@ from src.database import DatabaseEngine
 from config import DB_PATH
 
 
-class handler(BaseHTTPRequestHandler):
-    def do_GET(self):
-        clean_path = self.path.split("?")[0]
-        if clean_path in ("/", ""):
-            clean_path = "/index.html"
+def app(environ, start_response):
+    path = environ.get("PATH_INFO", "")
+    method = environ.get("REQUEST_METHOD", "GET")
 
-        file_path = root_dir / clean_path.lstrip("/")
+    if method == "OPTIONS":
+        start_response("200 OK", [
+            ("Content-Type", "application/json"),
+            ("Access-Control-Allow-Origin", "*"),
+            ("Access-Control-Allow-Methods", "POST, GET, OPTIONS"),
+            ("Access-Control-Allow-Headers", "Content-Type")
+        ])
+        return [b"{}"]
 
-        if file_path.exists() and file_path.is_file():
-            content_types = {
-                ".html": "text/html; charset=utf-8",
-                ".css": "text/css; charset=utf-8",
-                ".js": "application/javascript; charset=utf-8",
-                ".json": "application/json",
-                ".png": "image/png",
-                ".svg": "image/svg+xml",
-                ".ico": "image/x-icon"
-            }
-            ext = file_path.suffix.lower()
-            content_type = content_types.get(ext, "text/html; charset=utf-8")
-
-            self.send_response(200)
-            self.send_header("Content-Type", content_type)
-            self.send_header("Content-Disposition", "inline")
-            self.send_header("Cache-Control", "no-cache")
-            self.end_headers()
-
-            with open(file_path, "rb") as f:
-                self.wfile.write(f.read())
-        else:
-            # Fallback to index.html if file not found
-            index_path = root_dir / "index.html"
-            self.send_response(200)
-            self.send_header("Content-Type", "text/html; charset=utf-8")
-            self.send_header("Content-Disposition", "inline")
-            self.end_headers()
-            with open(index_path, "rb") as f:
-                self.wfile.write(f.read())
-
-    def do_POST(self):
-        db = DatabaseEngine(db_path=DB_PATH)
-        content_length = int(self.headers.get("Content-Length", 0))
-        body = self.rfile.read(content_length).decode("utf-8") if content_length > 0 else "{}"
-        
+    if method == "POST":
         try:
+            content_length = int(environ.get("CONTENT_LENGTH", 0))
+            body = environ["wsgi.input"].read(content_length).decode("utf-8")
             payload = json.loads(body)
         except Exception:
             payload = {}
 
-        if self.path.endswith("/api/query"):
+        db = DatabaseEngine(db_path=DB_PATH)
+
+        if path.endswith("/query") or "query" in path:
             sql_query = payload.get("query", "")
             try:
                 start_time = time.perf_counter()
                 df = db.execute_query(sql_query)
                 elapsed_ms = round((time.perf_counter() - start_time) * 1000, 2)
-                response_data = {
+                res = {
                     "status": "success",
                     "elapsed_ms": elapsed_ms,
                     "count": len(df),
@@ -81,24 +51,17 @@ class handler(BaseHTTPRequestHandler):
                     "rows": df.to_dict(orient="records")
                 }
             except Exception as e:
-                response_data = {"status": "error", "error_message": str(e)}
-            self.send_json(response_data)
+                res = {"status": "error", "error_message": str(e)}
 
-        elif self.path.endswith("/api/explain"):
+        elif path.endswith("/explain") or "explain" in path:
             sql_query = payload.get("query", "")
             try:
-                explain_sql = f"EXPLAIN QUERY PLAN {sql_query};"
-                df = db.execute_query(explain_sql)
-                response_data = {
-                    "status": "success",
-                    "columns": list(df.columns),
-                    "rows": df.to_dict(orient="records")
-                }
+                df = db.execute_query(f"EXPLAIN QUERY PLAN {sql_query};")
+                res = {"status": "success", "columns": list(df.columns), "rows": df.to_dict(orient="records")}
             except Exception as e:
-                response_data = {"status": "error", "error_message": str(e)}
-            self.send_json(response_data)
+                res = {"status": "error", "error_message": str(e)}
 
-        elif self.path.endswith("/api/user_timeline"):
+        elif path.endswith("/user_timeline") or "user_timeline" in path:
             raw_id = str(payload.get("user_id", "1")).strip().lower()
             clean_id = raw_id.replace("user_", "").lstrip("0") or "1"
             try:
@@ -106,23 +69,25 @@ class handler(BaseHTTPRequestHandler):
                 events_df = db.execute_query(f"SELECT * FROM events WHERE user_id = {clean_id} ORDER BY event_date ASC;")
                 subs_df = db.execute_query(f"SELECT * FROM subscriptions WHERE user_id = {clean_id};")
 
-                response_data = {
+                res = {
                     "status": "success",
                     "user": user_df.to_dict(orient="records")[0] if not user_df.empty else {},
                     "events": events_df.to_dict(orient="records"),
                     "subscription": subs_df.to_dict(orient="records")[0] if not subs_df.empty else None
                 }
             except Exception as e:
-                response_data = {"status": "error", "error_message": str(e)}
-            self.send_json(response_data)
-
+                res = {"status": "error", "error_message": str(e)}
         else:
-            self.send_response(404)
-            self.end_headers()
+            res = {"status": "error", "error_message": "Endpoint not found"}
 
-    def send_json(self, data):
-        self.send_response(200)
-        self.send_header("Content-Type", "application/json")
-        self.send_header("Access-Control-Allow-Origin", "*")
-        self.end_headers()
-        self.wfile.write(json.dumps(data).encode("utf-8"))
+        start_response("200 OK", [
+            ("Content-Type", "application/json"),
+            ("Access-Control-Allow-Origin", "*")
+        ])
+        return [json.dumps(res).encode("utf-8")]
+
+    start_response("200 OK", [
+        ("Content-Type", "application/json"),
+        ("Access-Control-Allow-Origin", "*")
+    ])
+    return [json.dumps({"status": "healthy", "service": "PixelPulse API"}).encode("utf-8")]
