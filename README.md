@@ -1,6 +1,6 @@
 <div align="center">
 
-  # ⚡ PixelPulse AI
+  # PixelPulse AI
   ### Enterprise Product Analytics & Live SQL Data Warehouse Platform
 
   [![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel_Cloud-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://pixel-pulse-omega.vercel.app/)
